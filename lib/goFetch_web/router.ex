@@ -20,6 +20,19 @@ defmodule GoFetchWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", GoFetchWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
+  scope "/home", GoFetchWeb do
+    pipe_through :browser
+
+    get "/", HomeController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GoFetchWeb do
   #   pipe_through :api
